@@ -25,7 +25,8 @@ Enemy.prototype.render = function() {
 
 var player = funtion(){
 
-
+    this.x = 70;
+    this.y = 89;
 
 }
 
