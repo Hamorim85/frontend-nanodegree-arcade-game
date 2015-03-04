@@ -2,7 +2,8 @@
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
+    this.startlocation =
+    this.speed=
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -21,6 +22,27 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+
+var player = funtion(){
+
+
+
+}
+
+player.prototype.update = function() {
+   
+}
+
+
+player.prototype.render = function() {
+       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+player.prototype.handleInput = funtion(){
+    
+}
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -30,6 +52,7 @@ Enemy.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+var allEnemies = {}
 
 
 // This listens for key presses and sends the keys to your
