@@ -1,4 +1,4 @@
-sound
+
 
 var minSpeed = 0.3; 
 var maxSpeed = 0.9;
