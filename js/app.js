@@ -1,5 +1,3 @@
-change
-
 var minSpeed = 0.3; 
 var maxSpeed = 0.9;
 
@@ -16,6 +14,7 @@ Enemy.prototype.update = function(dt) {
       var row = rowArray[Math.floor(Math.random() * rowArray.length)];
       this.y = row
       this.speed = (Math.random() * (maxSpeed - minSpeed) + minSpeed);
+      console.log(this.x, this.y);
     }
 }
 
