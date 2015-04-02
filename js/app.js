@@ -43,7 +43,7 @@ function checkCollisions(){
   if ((Math.floor(allEnemies[2].x) < player.x + 34) && (Math.floor(allEnemies[2].x) > player.x - 34) && Math.floor(allEnemies[2].y) == player.y) {
     playerDies(player); 
   }
-  if (player.y <= 50){
+  if (player.y <= (56-(-27))/2){
     playerWins(player);
   }
 }
@@ -55,31 +55,31 @@ player.prototype.render = function() {
 player.prototype.handleInput = function(key) {
   switch(key) {
     case 'up':
-      if (player.y <= -22) {
+      if (player.y <= -27 ) {
         player.y = -27;
       } else {
-        player.y -= 83;
+        player.y = player.y - 83;
       }
       break;
     case 'down':
       if (player.y >= 388) {
         player.y = 388;
       } else {
-        player.y += 83;
+        player.y = player.y + 83;
       }
       break;
     case 'left':
       if (player.x <= 0) {
         player.x = 0;
-      } else {
-        player.x -= 100;
+      } else{ 
+      player.x = player.x - 101
       }
       break
     case 'right':
-      if (player.x >= 504) {
-        player.x = 504;
+      if (player.x >= 505) {
+        player.x = 505;
       } else {
-        player.x += 101;
+        player.x = player.x + 101;
       }
       break
     }
@@ -87,7 +87,7 @@ player.prototype.handleInput = function(key) {
 
 
 var resetPlayer = function(player) {
-  player.x = 50 - (101/2);
+  player.x = (101/2)-(101/2);
   player.y = 388;
 };
 
@@ -100,6 +100,7 @@ function playerWins(player) {
     alert("You win");
     resetPlayer(player);
 }
+
 
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -134,5 +135,5 @@ enemy3.y = rowArray[2];
 enemy3.speed = 200;
 
 var player = new player();
-player.x = 50 -(101/2);
+player.x = (101/2)-(101/2);
 player.y = 388;
