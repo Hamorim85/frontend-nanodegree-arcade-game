@@ -1,5 +1,4 @@
-var minSpeed = 0.3; 
-var maxSpeed = 0.9;
+speedArray = [200, 250, 400]
 
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
@@ -7,15 +6,15 @@ var Enemy = function() {
 
 rowArray = [56, 139, 222]
 
-Enemy.prototype.update = function(dt) {
-    this.x += 230 * this.speed * dt;
+Enemy.prototype.update = function(dt) {   
     if (this.x > 600) { // bug goes off of canvas
-      this.x = 0
-      var row = rowArray[Math.floor(Math.random() * rowArray.length)];
-      this.y = row
-      this.speed = (Math.random() * (maxSpeed - minSpeed) + minSpeed);
-      console.log(this.x, this.y);
+      this.x = -50; // bug comes in off canvas
+      var row = rowArray[Math.floor(Math.random() * rowArray.length)]; // this line generates a random row
+      this.y = row; // y is set
+      this.speed = speedArray[Math.floor(Math.random() * speedArray.length)]; //generates random speed slow, fast and crazy!    
     }
+    enemyMove = this.speed * dt;
+    this.x = this.x + enemyMove ;
 }
 
 Enemy.prototype.render = function() {
@@ -27,18 +26,24 @@ var player = function() {
 }
 
 
-player.prototype.update = function(dt) {
+
+player.prototype.update = function() {
+    checkCollisions();
+}
+
+
+function checkCollisions(){
   // if collision, player dies
-  if ((Math.floor(allEnemies[0].x) < this.x + 34) && (Math.floor(allEnemies[0].x) > this.x - 34) && Math.floor(allEnemies[0].y) == this.y) {
+  if ((Math.floor(allEnemies[0].x) < player.x + 34) && (Math.floor(allEnemies[0].x) > player.x  - 34) && Math.floor(allEnemies[0].y) == player.y) {
     playerDies(player);
   }
-  if ((Math.floor(allEnemies[1].x) < this.x + 34) && (Math.floor(allEnemies[1].x) > this.x - 34) && Math.floor(allEnemies[1].y) == this.y) {
+  if ((Math.floor(allEnemies[1].x) < player.x + 34) && (Math.floor(allEnemies[1].x) > player.x - 34) && Math.floor(allEnemies[1].y) == player.y) {
     playerDies(player);
   }
-  if ((Math.floor(allEnemies[2].x) < this.x + 34) && (Math.floor(allEnemies[2].x) > this.x - 34) && Math.floor(allEnemies[2].y) == this.y) {
-    playerDies(player);
+  if ((Math.floor(allEnemies[2].x) < player.x + 34) && (Math.floor(allEnemies[2].x) > player.x - 34) && Math.floor(allEnemies[2].y) == player.y) {
+    playerDies(player); 
   }
-  if (this.y <= 50){
+  if (player.y <= 50){
     playerWins(player);
   }
 }
@@ -67,11 +72,11 @@ player.prototype.handleInput = function(key) {
       if (player.x <= 0) {
         player.x = 0;
       } else {
-        player.x -= 101;
+        player.x -= 100;
       }
       break
     case 'right':
-      if (player.x >= 500) {
+      if (player.x >= 504) {
         player.x = 504;
       } else {
         player.x += 101;
@@ -109,22 +114,24 @@ document.addEventListener('keyup', function(e) {
 });
 
 
+
+// Initiating Enemy outside the window at diffent x values so that they don't come in all at once. 
 allEnemies = [];
 var enemy = new Enemy();
 allEnemies.push(enemy);
-enemy.x = -50;
+enemy.x = -50; 
 enemy.y = rowArray[0];
-enemy.speed = 1;
+enemy.speed = 200;
 var enemy2 = new Enemy();
 allEnemies.push(enemy2);
-enemy2.x = 250;
+enemy2.x = -250;
 enemy2.y = rowArray[1];
-enemy2.speed = 1;
+enemy2.speed = 200;
 var enemy3 = new Enemy();
 allEnemies.push(enemy3);
 enemy3.x = -150;
 enemy3.y = rowArray[2];
-enemy3.speed = 1;
+enemy3.speed = 200;
 
 var player = new player();
 player.x = 50 -(101/2);
