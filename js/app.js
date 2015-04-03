@@ -23,12 +23,22 @@ Enemy.prototype.render = function() {
 
 var player = function() {
     this.sprite = 'images/char-boy.png';
+    this.score = 0;
+    this.level = 1;
+    this.life = 3;
 }
 
+function renderScoreLine (dt) {
+    ctx.font = "20px 'Press Start 2P'";
+    ctx.clearRect(0, 0, 606, 100);
+    ctx.fillText('Score: ' + player.score, 20, 40);
+    ctx.fillText('Life: ' + player.life, 450, 40);
+};
 
 
 player.prototype.update = function() {
     checkCollisions();
+    renderScoreLine();
 }
 
 
@@ -43,7 +53,7 @@ function checkCollisions(){
   if ((Math.floor(allEnemies[2].x) < player.x + 34) && (Math.floor(allEnemies[2].x) > player.x - 34) && Math.floor(allEnemies[2].y) == player.y) {
     playerDies(player); 
   }
-  if (player.y <= (56-(-27))/2){
+  if (player.y <= 41.5){
     playerWins(player);
   }
 }
@@ -87,17 +97,22 @@ player.prototype.handleInput = function(key) {
 
 
 var resetPlayer = function(player) {
-  player.x = (101/2)-(101/2);
+  player.x = 0;
   player.y = 388;
 };
 
 function playerDies(player) {
-  alert("You died. Hit ok to reset");
+  player.life = player.life - 1;  
+  if ( player.life === 0 ) {
+    alert("Game is Over");
+    player.score = 0;
+    player.life = 3;
+  }
   resetPlayer(player);
 }
 
 function playerWins(player) {
-    alert("You win");
+    player.score += 100;
     resetPlayer(player);
 }
 
@@ -108,7 +123,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        32: 'space'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
