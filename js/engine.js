@@ -57,8 +57,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    };
-
+    }
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
@@ -94,7 +93,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        Player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -152,7 +151,7 @@ var Engine = (function(global) {
             enemy.render();
         });
 
-        player.render();
+        Player.render();
     }
 
     /* This function does nothing but it could have been a good place to
