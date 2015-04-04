@@ -1,6 +1,9 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Game is the same as the traditional frogger game. 
 
-for self-checking their submission.
+You score 100 everytime you reach the water. 
+
+You have 3 lives. Each time you die all 3 lives, you loose all your point game resets itself. 
+
